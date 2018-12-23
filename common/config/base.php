@@ -22,9 +22,6 @@ return array(
         'kafkaProducer' => [
             "class" =>  'common\components\LKafkaProducerQueue'
         ],
-        'queue' => [
-            "class" =>  'common\components\LRabbitQueue'
-        ],
         'log' => [
             'targets' => [
                 'kafka' => [

@@ -15,14 +15,6 @@ $commonConfig = array(
             ],
             "requireAck" => 0,
         ],
-        'queue' => [
-            'credentials' => [
-                'host' => '',
-                'port' => '5672',
-                'login' => '',
-                'password' => ''
-            ]
-        ],
     ],
     'params' => [],
     "configService" => [
