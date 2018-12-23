@@ -9,12 +9,6 @@ $commonConfig = array(
             'username' => '',
             'password' => '',
         ],
-        'kafkaProducer' => [
-            "metadata" => [
-                "brokerList" => "192.168.40.122:9200",
-            ],
-            "requireAck" => 0,
-        ],
     ],
     'params' => [],
     "configService" => [

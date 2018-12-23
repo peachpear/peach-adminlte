@@ -19,9 +19,6 @@ return array(
 		'curl'=> [
 			'class' => 'common\components\LComponentCurl',
 		],
-        'kafkaProducer' => [
-            "class" =>  'common\components\LKafkaProducerQueue'
-        ],
         'log' => [
             'targets' => [
                 'kafka' => [
