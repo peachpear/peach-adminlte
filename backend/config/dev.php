@@ -5,13 +5,12 @@ ini_set("display_errors", true);
 $initConfig = [
     "components"  =>  [
         'log' => [
+            'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
-                'kafka'  =>
-                    [
-                        'levels' => ['error', 'warning', "trace"],
-                        'logVars'=>[],
-                    ],
-            ]
+                'file' => [
+                    'levels' => ['error', 'warning', "trace"],
+                ],
+            ],
         ],
     ],
     "params"    =>  [

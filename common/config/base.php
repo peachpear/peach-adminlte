@@ -21,8 +21,8 @@ return array(
 		],
         'log' => [
             'targets' => [
-                'kafka' => [
-                    'class' => 'common\lib\LKafkaTarget',
+                'file' => [
+                    'class' => 'yii\log\FileTarget',
                 ],
             ],
         ]

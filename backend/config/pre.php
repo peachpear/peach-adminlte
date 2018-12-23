@@ -5,12 +5,10 @@ $initConfig = [
     "components"  =>  [
         'log' => [
             'targets' => [
-                'kafka'  =>
-                    [
-                        'levels' => ['error', 'warning', "trace"],
-                        'logVars'=>[],
-                    ],
-            ]
+                'file' => [
+                    'levels' => ['error', 'warning'],
+                ],
+            ],
         ],
     ],
     "params"    =>  [
