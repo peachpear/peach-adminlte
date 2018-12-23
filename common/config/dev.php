@@ -4,11 +4,6 @@ $baseConfig = include('base.php');
 
 $commonConfig = array(
 	'components' => [
-		'cache' => [
-            'host' => 'test.redis.demo.com',
-            'port' => 6379,
-            'keyPrefix' => 'demoDev.',
-		],
         'demoDB' => [
             'dsn' => 'mysql:host=192.168.100.2;port=3306;dbname=demo',
             'username' => 'demo',

@@ -17,7 +17,7 @@ return array(
             'parsers' => [
                 'application/json' => 'yii\web\JsonParser',
             ],
-            'cookieValidationKey' => '22ej6cKTmKmvxLwAgbJeWnm16u1IbLTP',
+            'cookieValidationKey' => '0w8Wb50OEKfNeJbmuLuG3XQb4hKn2ykw',
         ],
         'errorHandler' => [
             'class' => 'common\components\LErrorHandler',

@@ -3,7 +3,6 @@
     "description": "peach for web framework, using adminlte pages",
     "keywords": ["peach", "web", "adminlte", "peachpear"],
     "type": "project",
-    "language": "php",
     "license": "MPL-2.0",
     "authors": [
         {
