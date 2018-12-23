@@ -12,7 +12,7 @@ pear让你更畅快地编程。peach-adminlte是以peach-web为基础，增加Ad
 ```
 cd /yourProjectParentPath
 
-composer create-project peachpear/pear-adminlte yourProjectName
+composer create-project peachpear/peach-adminlte yourProjectName
 
 cd /path/yourProjectName/backend/config
 
