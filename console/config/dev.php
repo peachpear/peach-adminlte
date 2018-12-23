@@ -11,11 +11,6 @@ $initConfig = [
         ],
     ],
     "params"    =>  [
-        'elkIndexName' => [
-            "error" =>  "error_demo_logs_dev",
-            "warning" =>  "demo_logs_dev",
-            "info" =>  "demo_logs_dev",
-        ],
     ]
 ];
 
