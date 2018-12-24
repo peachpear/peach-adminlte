@@ -2,7 +2,6 @@
 namespace console\components;
 
 use common\components\LException;
-use common\components\LRabbitQueue;
 use Yii;
 use yii\console\ErrorHandler;
 
@@ -12,49 +11,20 @@ use yii\console\ErrorHandler;
  */
 class LConsoleErrorHandler extends ErrorHandler
 {
-    public $sendTo;
-    public $sendCC;
-
     public function handleException( $exception )
     {
         $data = $this->formatException( $exception );
         $this->logException( $exception );
-        // 发邮件
+
         if ( YII_DEBUG ) {
             throw $exception;
-        } else {
-            $this->sendErrorMsg( $data );
         }
-    }
-
-    /**
-     * 发邮件
-     * @param $data
-     * @internal param $exception
-     */
-    public function sendErrorMsg( $data )
-    {
-        /** @var LRabbitQueue $queue */
-        $queue = Yii::$app->get("queue");
-        $params = [
-            'send_to' => $this->sendTo,
-            'cc_to' => $this->sendCC,
-            'text' => json_encode( $data ),
-            'title' => "[".ENV.']cli-exception-error',
-            'file' => []
-        ];
-        $queue->produce(
-            $params,
-            'async',
-            'mail'
-        );
     }
 
     public function handleError($code, $message, $file, $line)
     {
         $exception =  new \ErrorException($message, $code, 1, $file, $line);
         $this->logException($exception);
-        $this->sendErrorMsg($this->formatException($exception));
     }
 
     protected function formatException($exception)
