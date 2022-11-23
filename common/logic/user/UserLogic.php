@@ -2,7 +2,7 @@
 namespace common\logic\user;
 
 use yii;
-use yii\base\Object;
+use yii\base\BaseObject;
 use common\dao\read\user\RUserDao;
 use common\dao\write\user\WUserDao;
 
@@ -11,7 +11,7 @@ use common\dao\write\user\WUserDao;
  * Class UserLogic
  * @package common\logic\user
  */
-class UserLogic extends Object
+class UserLogic extends BaseObject
 {
     /**
      * 获取用户总数
