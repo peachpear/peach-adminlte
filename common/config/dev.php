@@ -3,7 +3,7 @@ defined("ENV") || define("ENV", "dev");
 $baseConfig = include('base.php');
 
 $commonConfig = array(
-	'components' => [
+    'components' => [
         'demoDB' => [
             'dsn' => 'mysql:host=192.168.56.108;dbname=peach-adminlte',
             'username' => 'root',

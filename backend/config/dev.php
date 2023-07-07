@@ -3,7 +3,7 @@ defined('YII_DEBUG') or define("YII_DEBUG", true);
 ini_set("display_errors", true);
 
 $initConfig = [
-    "components"  =>  [
+    "components" => [
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
@@ -13,7 +13,7 @@ $initConfig = [
             ],
         ],
     ],
-    "params"    =>  [
+    "params" => [
     ],
 ];
 

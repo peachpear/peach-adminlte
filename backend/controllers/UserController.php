@@ -1,4 +1,5 @@
 <?php
+
 namespace backend\controllers;
 
 use Yii;
@@ -16,11 +17,11 @@ class UserController extends CommonController
      * @param \yii\base\Action $action
      * @return bool
      */
-    public function beforeAction( $action )
+    public function beforeAction($action)
     {
-        if ( parent::beforeAction($action) ) {
+        if (parent::beforeAction($action)) {
             // 普通用户不能操作该类
-            if ( Yii::$app->user->identity->type == 30 ) {
+            if (Yii::$app->user->identity->type == 30) {
                 return false;
             }
 
@@ -46,30 +47,30 @@ class UserController extends CommonController
      * @param string $nickname
      * @return string
      */
-    public function actionUsersPage( $type = "", $status = "", $nickname = "" )
+    public function actionUsersPage($type = "", $status = "", $nickname = "")
     {
         // 初始化
         $params = [];
 
         // 搜索条件赋值
-        if ( !empty($type) ) {
+        if (!empty($type)) {
             $params['type'] = $type;
         }
         // 管理员只查看普通用户
-        if ( Yii::$app->user->identity->type == 20 ) {
+        if (Yii::$app->user->identity->type == 20) {
             $params['type'] = 30;
         }
 
-        if( !empty($status) ) {
+        if (!empty($status)) {
             $params['status'] = $status;
         }
 
-        if ( !empty($nickname) ) {
+        if (!empty($nickname)) {
             $params['nickname'] = $nickname;
         }
 
         // 执行
-        $total = UserLogic::getUsersTotal( $params );
+        $total = UserLogic::getUsersTotal($params);
 
         return $this->renderPartial('users-page', ['count' => $total]);
     }
@@ -84,25 +85,25 @@ class UserController extends CommonController
      * @param int $page_num
      * @return string
      */
-    public function actionUsersLists( $type = "", $status = "", $nickname = "", $order_name = "", $order_type = "", $page_num = 1 )
+    public function actionUsersLists($type = "", $status = "", $nickname = "", $order_name = "", $order_type = "", $page_num = 1)
     {
         // 初始化
         $params = [];
 
         // 搜索条件赋值
-        if ( !empty($type) ) {
+        if (!empty($type)) {
             $params['type'] = $type;
         }
         // 管理员只查看普通用户
-        if ( Yii::$app->user->identity->type == 20 ) {
+        if (Yii::$app->user->identity->type == 20) {
             $params['type'] = 30;
         }
 
-        if( !empty($status) ) {
+        if (!empty($status)) {
             $params['status'] = $status;
         }
 
-        if ( !empty($nickname) ) {
+        if (!empty($nickname)) {
             $params['nickname'] = $nickname;
         }
 
@@ -119,7 +120,7 @@ class UserController extends CommonController
         ];
 
         // 执行
-        $data = UserLogic::getUsersList( $params, $orders, $pages );
+        $data = UserLogic::getUsersList($params, $orders, $pages);
 
         return $this->renderPartial('users-lists', ['data' => $data]);
     }
@@ -129,19 +130,19 @@ class UserController extends CommonController
      * @param int $user_id
      * @return string
      */
-    public function actionUserAdd( $user_id = 0 )
+    public function actionUserAdd($user_id = 0)
     {
         $data = [];
 
-        if ( !empty($user_id) ) {
+        if (!empty($user_id)) {
             $params['id'] = $user_id;
 
             // 管理员只查看普通用户
-            if ( Yii::$app->user->identity->type == 20 ) {
+            if (Yii::$app->user->identity->type == 20) {
                 $params['type'] = 30;
             }
 
-            $data = UserLogic::getUserInfo( $params );
+            $data = UserLogic::getUserInfo($params);
         }
 
         return $this->renderPartial('user-add', ['data' => $data]);
@@ -155,7 +156,7 @@ class UserController extends CommonController
     {
         $req = Yii::$app->request;
 
-        if ( !$req->isPost ) {
+        if (!$req->isPost) {
             return json_encode([
                 'code' => 2001,
                 'msg' => '非法提交',
@@ -166,7 +167,7 @@ class UserController extends CommonController
         $params['id'] = !empty($req->post('id')) ? $req->post('id') : 0;
 
         $params['type'] = $req->post('type');
-        if ( empty($params['type']) ) {
+        if (empty($params['type'])) {
             return json_encode([
                 'code' => 2010,
                 'msg' => '请选择用户类型',
@@ -174,12 +175,12 @@ class UserController extends CommonController
             ]);
         }
         // 管理员只查看普通用户
-        if ( Yii::$app->user->identity->type == 20 ) {
+        if (Yii::$app->user->identity->type == 20) {
             $params['type'] = 30;
         }
 
         $params['nickname'] = $req->post('nickname');
-        if ( empty($params['nickname']) ) {
+        if (empty($params['nickname'])) {
             return json_encode([
                 'code' => 2010,
                 'msg' => '请输入用户姓名',
@@ -188,7 +189,7 @@ class UserController extends CommonController
         }
 
         $params['username'] = $req->post('username');
-        if ( empty($params['username']) ) {
+        if (empty($params['username'])) {
             return json_encode([
                 'code' => 2010,
                 'msg' => '请输入用户账户',
@@ -198,7 +199,7 @@ class UserController extends CommonController
 
         $where['username'] = $params['username'];
         $user_info = UserLogic::getUserInfo($where);
-        if ( $user_info && $user_info->id != $params['id'] ) {
+        if ($user_info && $user_info->id != $params['id']) {
             return json_encode([
                 'code' => 2010,
                 'msg' => '该用户账户已存在',
@@ -207,7 +208,7 @@ class UserController extends CommonController
         }
 
         $params['phone'] = $req->post('phone');
-        if ( empty($params['phone']) ) {
+        if (empty($params['phone'])) {
             return json_encode([
                 'code' => 2010,
                 'msg' => '请输入用户手机号码',
@@ -216,7 +217,7 @@ class UserController extends CommonController
         }
 
         $params['email'] = $req->post('email');
-        if ( empty($params['email']) ) {
+        if (empty($params['email'])) {
             return json_encode([
                 'code' => 2010,
                 'msg' => '请输入用户邮箱',
@@ -225,7 +226,7 @@ class UserController extends CommonController
         }
 
         $params['status'] = $req->post('status');
-        if ( empty($params['status']) ) {
+        if (empty($params['status'])) {
             return json_encode([
                 'code' => 2010,
                 'msg' => '请选择用户状态',
@@ -236,9 +237,9 @@ class UserController extends CommonController
         $params['updated_user_id'] = Yii::$app->user->id;
 
         // 保存处理
-        $data = UserLogic::saveUserInfo( $params );
+        $data = UserLogic::saveUserInfo($params);
 
-        if ( $data['code'] == 200 ) {
+        if ($data['code'] == 200) {
             $res = [
                 'code' => 200,
                 'msg' => 'ok',
@@ -252,7 +253,7 @@ class UserController extends CommonController
             ];
         }
 
-        return json_encode( $res );
+        return json_encode($res);
     }
 
     /**
@@ -263,7 +264,7 @@ class UserController extends CommonController
     {
         $req = Yii::$app->request;
 
-        if ( !$req->isPost ) {
+        if (!$req->isPost) {
             return json_encode([
                 'code' => 2001,
                 'msg' => '非法提交',
@@ -272,7 +273,7 @@ class UserController extends CommonController
         }
 
         $params['id'] = $req->post('id');
-        if ( empty($params['id']) ) {
+        if (empty($params['id'])) {
             return json_encode([
                 'code' => 2010,
                 'msg' => '未选择用户',
@@ -283,7 +284,7 @@ class UserController extends CommonController
         if (Yii::$app->user->identity->type == 20) {
             $where['id'] = $params['id'];
             $user_info = UserLogic::getUserInfo($where);
-            if ( $user_info && $user_info->type != 30 ) {
+            if ($user_info && $user_info->type != 30) {
                 return json_encode([
                     'code' => 2010,
                     'msg' => '你无权操作该用户',
@@ -297,9 +298,9 @@ class UserController extends CommonController
         $params['updated_user_id'] = Yii::$app->user->id;
 
         // 保存处理
-        $data = UserLogic::saveUserInfo( $params );
+        $data = UserLogic::saveUserInfo($params);
 
-        if ( $data['code'] == 200 ) {
+        if ($data['code'] == 200) {
             $res = [
                 'code' => 200,
                 'msg' => 'ok',
@@ -313,7 +314,7 @@ class UserController extends CommonController
             ];
         }
 
-        return json_encode( $res );
+        return json_encode($res);
     }
 
     /**
@@ -324,7 +325,7 @@ class UserController extends CommonController
     {
         $req = Yii::$app->request;
 
-        if ( !$req->isPost ) {
+        if (!$req->isPost) {
             return json_encode([
                 'code' => 2001,
                 'msg' => '非法提交',
@@ -333,7 +334,7 @@ class UserController extends CommonController
         }
 
         $params['id'] = $req->post('id');
-        if ( empty($params['id']) ) {
+        if (empty($params['id'])) {
             return json_encode([
                 'code' => 2010,
                 'msg' => '未选择用户',
@@ -344,7 +345,7 @@ class UserController extends CommonController
         if (Yii::$app->user->identity->type == 20) {
             $where['id'] = $params['id'];
             $user_info = UserLogic::getUserInfo($where);
-            if ( $user_info && $user_info->type != 30 ) {
+            if ($user_info && $user_info->type != 30) {
                 return json_encode([
                     'code' => 2010,
                     'msg' => '你无权操作该用户',
@@ -354,14 +355,14 @@ class UserController extends CommonController
         }
 
         $params['auth_key'] = Yii::$app->security->generateRandomString();
-        $params['password_hash'] = Yii::$app->security->generatePasswordHash( '123456' );
+        $params['password_hash'] = Yii::$app->security->generatePasswordHash('123456');
 
         $params['updated_user_id'] = Yii::$app->user->id;
 
         // 保存处理
-        $data = UserLogic::saveUserInfo( $params );
+        $data = UserLogic::saveUserInfo($params);
 
-        if ( $data['code'] == 200 ) {
+        if ($data['code'] == 200) {
             $res = [
                 'code' => 200,
                 'msg' => 'ok',
@@ -375,6 +376,6 @@ class UserController extends CommonController
             ];
         }
 
-        return json_encode( $res );
+        return json_encode($res);
     }
 }

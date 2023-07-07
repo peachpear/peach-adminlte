@@ -1,4 +1,5 @@
 <?php
+
 namespace backend\models;
 
 use Yii;
@@ -43,7 +44,7 @@ class User extends ActiveRecord implements IdentityInterface
                 'updatedAtAttribute' => 'updated_time',
 //            'value'   => new Expression('NOW()'),
 //            'value'   => function(){return time();},
-                'value'   => time(),
+                'value' => time(),
             ]
         ];
     }
@@ -116,7 +117,7 @@ class User extends ActiveRecord implements IdentityInterface
             return false;
         }
 
-        $timestamp = (int) substr($token, strrpos($token, '_') + 1);
+        $timestamp = (int)substr($token, strrpos($token, '_') + 1);
         $expire = Yii::$app->params['user.passwordResetTokenExpire'];
         return $timestamp + $expire >= time();
     }

@@ -1,4 +1,5 @@
 <?php
+
 namespace backend\controllers;
 
 use backend\components\BaseController;
@@ -34,9 +35,9 @@ abstract class CommonController extends BaseController
      * @param \yii\base\Action $action
      * @return bool
      */
-    public function beforeAction( $action )
+    public function beforeAction($action)
     {
-        if ( parent::beforeAction($action) ) {
+        if (parent::beforeAction($action)) {
             // 如果未登录，则跳转到登录页
 //            if ( Yii::$app->user->isGuest ) {
 //                return Yii::$app->response->redirect( Yii::$app->urlManager->createUrl('site/login') );

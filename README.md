@@ -1,4 +1,5 @@
 # peach-adminlte
+
 pear让你更畅快地编程。peach-adminlte是以peach-web为基础，增加AdminLTE页面，拓展为可直接使用的后台网站。 
 
 ### 前提准备
@@ -130,3 +131,15 @@ CREATE TABLE `user` (
 -- ----------------------------
 INSERT INTO `user` VALUES ('1', '10', 'admin', 'mwrf34kLfW85FVN5X88166bulEhRkzQe', '$2y$13$LDJ4J0rX0YIQX/TcPPilqOzSQb.mhaPC7HjaTef9i0MfrLGwoUQny', null, '超级管理员', '1010', 'admin@demo.com', '10', '1541507292', '0', '1545362198', '1');
 ```
+
+### 备注
+
+这里选的是AdminLTE2版本。
+
+官网地址：<https://adminlte.io/>
+
+Github地址：<https://github.com/ColorlibHQ/AdminLTE>
+
+下载地址： <https://github.com/ColorlibHQ/AdminLTE/releases>
+
+

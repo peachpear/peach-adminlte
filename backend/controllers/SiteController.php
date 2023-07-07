@@ -1,4 +1,5 @@
 <?php
+
 namespace backend\controllers;
 
 use backend\models\LoginForm;
@@ -51,10 +52,10 @@ class SiteController extends BaseController
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post())) {
-            if ( $model->login() ) {
+            if ($model->login()) {
                 $this->ajaxSuccess();
             } else {
-                $this->ajaxReturn( 400, '用户名或密码错误', []);
+                $this->ajaxReturn(400, '用户名或密码错误', []);
             }
         } else {
             $model->password = '';
@@ -81,7 +82,8 @@ class SiteController extends BaseController
     {
         echo Yii::$app->request->getPathInfo();
         echo "</br>";
-        echo "ddd";die;
+        echo "ddd";
+        die;
     }
 
 }

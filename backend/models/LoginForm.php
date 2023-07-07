@@ -1,4 +1,5 @@
 <?php
+
 namespace backend\models;
 
 use Yii;
@@ -14,7 +15,6 @@ class LoginForm extends Model
     public $rememberMe = true;
 
     private $_user;
-
 
     /**
      * {@inheritdoc}

@@ -1,4 +1,5 @@
 <?php
+
 namespace backend\controllers;
 
 use Yii;
@@ -20,9 +21,9 @@ class PortalController extends CommonController
     {
         $req = Yii::$app->request;
 
-        if ( $req->isPost ) {
+        if ($req->isPost) {
             $params['password_old'] = $req->post('password_old');
-            if ( empty($params['password_old']) ) {
+            if (empty($params['password_old'])) {
                 return json_encode([
                     'code' => 2010,
                     'msg' => '请输入原密码',
@@ -31,7 +32,7 @@ class PortalController extends CommonController
             }
 
             $params['password_new'] = $req->post('password_new');
-            if ( empty($params['password_new']) ) {
+            if (empty($params['password_new'])) {
                 return json_encode([
                     'code' => 2010,
                     'msg' => '请输入新密码',
@@ -40,7 +41,7 @@ class PortalController extends CommonController
             }
 
             $params['password_confirm'] = $req->post('password_confirm');
-            if ( empty($params['password_confirm']) ) {
+            if (empty($params['password_confirm'])) {
                 return json_encode([
                     'code' => 2010,
                     'msg' => '请输入确认密码',
@@ -48,7 +49,7 @@ class PortalController extends CommonController
                 ]);
             }
 
-            if ( $params['password_new'] != $params['password_confirm'] ) {
+            if ($params['password_new'] != $params['password_confirm']) {
                 return json_encode([
                     'code' => 2010,
                     'msg' => '新密码与确认密码不一致',
@@ -56,7 +57,7 @@ class PortalController extends CommonController
                 ]);
             }
 
-            if ( $params['password_new'] == $params['password_old'] ) {
+            if ($params['password_new'] == $params['password_old']) {
                 return json_encode([
                     'code' => 2010,
                     'msg' => '新密码与原密码不能相同',
@@ -64,9 +65,9 @@ class PortalController extends CommonController
                 ]);
             }
 
-            $model = User::findIdentity( Yii::$app->user->id );
+            $model = User::findIdentity(Yii::$app->user->id);
 
-            if ( !$model->validatePassword( $params['password_old'] ) ) {
+            if (!$model->validatePassword($params['password_old'])) {
                 return json_encode([
                     'code' => 2010,
                     'msg' => '原密码输入错误',
@@ -75,11 +76,11 @@ class PortalController extends CommonController
             }
 
             $model->generateAuthKey();
-            $model->setPassword( $params['password_new'] );
+            $model->setPassword($params['password_new']);
             $model->updated_user_id = Yii::$app->user->id;
 
-            if ( $model->save() ) {
-                Yii::$app->user->login( $model, (new LoginForm)->rememberMe ? 3600 * 24 * 30 : 0 );
+            if ($model->save()) {
+                Yii::$app->user->login($model, (new LoginForm)->rememberMe ? 3600 * 24 * 30 : 0);
                 $res = [
                     'code' => 200,
                     'msg' => 'ok',
@@ -93,7 +94,7 @@ class PortalController extends CommonController
                 ];
             }
 
-            return json_encode( $res );
+            return json_encode($res);
         }
 
         return $this->renderPartial('password-reset');

@@ -1,12 +1,12 @@
 <?php
 return array(
-	'name' => "APP",
-	'id'   => "php-demo",
-	'basePath' => dirname(__DIR__),
-	'defaultRoute' => 'home/index',
+    'name' => "APP",
+    'id' => "php-demo",
+    'basePath' => dirname(__DIR__),
+    'defaultRoute' => 'home/index',
     'controllerNamespace' => "backend\controllers",
     'aliases' => [
-        '@backend' => realpath(__DIR__."/../"),
+        '@backend' => realpath(__DIR__ . "/../"),
     ],
     "components" => [
         // 内部组件
